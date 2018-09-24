@@ -1,0 +1,39 @@
+﻿@model SiteECommerce.Models.City
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir cidade</h2>
+<p></p>
+<h4 style="color: red;">Deseja realmente excluir esta cidade?</h4>
+<div>   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Departament.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departament.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-danger" />
+            @Html.ActionLink("Voltar a lista de departamentos", "Index", new { }, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>
