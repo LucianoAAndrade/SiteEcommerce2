@@ -23,7 +23,9 @@ namespace SiteECommerce
 
         private void checkRolesAndSuperUser()
         {
-            UserHelper.UserHeper.CheckRole();
+            UserHelper.UsersHelper.CheckRole("Admin");
+            UserHelper.UsersHelper.CheckRole("User");
+            UserHelper.UsersHelper.CheckSuperUser();
         }
     }
 }

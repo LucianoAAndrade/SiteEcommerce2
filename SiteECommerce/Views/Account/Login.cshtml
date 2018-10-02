@@ -38,11 +38,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Efetuar login" class="btn btn-default" />
+                        <input type="submit" value="Efetuar login" class="btn btn-success" />
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Registrar-se como novo usuário", "Register")
+                    @Html.ActionLink("Registrar-se como novo usuário", "Register", new { }, new { @class = "btn btn-primary" })
                 </p>
                 @* Ativar isso assim que você tiver a confirmação de conta ativada para a funcionalidade de redefinição de senha
                     <p>

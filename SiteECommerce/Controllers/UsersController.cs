@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using static SiteECommerce.Classes.UserHelper;
 
 namespace SiteECommerce.Controllers
 {
@@ -17,6 +18,13 @@ namespace SiteECommerce.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var cities = db.Cities.Where(m => m.DepartamentsId == departamentId);
             return Json(cities);
+        }
+
+        public JsonResult GetCompany(int citiesId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var Companies = db.Companies.Where(m => m.CityId == citiesId);
+            return Json(Companies);
         }
 
         // GET: Users
@@ -61,6 +69,7 @@ namespace SiteECommerce.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
+                UsersHelper.CreateUserASP(user.UserName, "User");
 
                 if (user.PhotoFile != null)
                 {
@@ -128,6 +137,13 @@ namespace SiteECommerce.Controllers
                     }
                 }
 
+                var db2 = new EcommerceContext();
+                var currentUser = db2.Users.Find(user.UserId);
+                if (currentUser.UserName != user.UserName)
+                {
+                    UsersHelper.UpdateUserName(currentUser.UserName, user.UserName);
+                }
+                db2.Dispose();
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -161,6 +177,7 @@ namespace SiteECommerce.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
+            UsersHelper.DeleteUser(user.UserName);
             return RedirectToAction("Index");
         }
 
