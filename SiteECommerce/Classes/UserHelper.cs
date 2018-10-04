@@ -57,7 +57,7 @@ namespace SiteECommerce.Classes
                     roleManager.Create(new IdentityRole(roleName));
                 }
             }
-
+            //checa se a um super usuario
             public static void CheckSuperUser()
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
@@ -71,6 +71,7 @@ namespace SiteECommerce.Classes
                 }
                 userManager.AddToRole(useAsp.Id, "Admin");
             }
+            //cria um usuario comum
             public static void CreateUserASP(string email, string roleName)
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
@@ -83,6 +84,7 @@ namespace SiteECommerce.Classes
                 userManager.Create(userASP, email);
                 userManager.AddToRole(userASP.Id, roleName);
             }
+            //cria um usuario utilizando a superclasse
             public static void CreateUserASP(string email, string roleName, string password)
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
@@ -95,6 +97,7 @@ namespace SiteECommerce.Classes
                 userManager.Create(userASP, password);
                 userManager.AddToRole(userASP.Id, roleName);
             }
+            // redefine a senha
             public static async Task PasswordRecovery(string email)
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));

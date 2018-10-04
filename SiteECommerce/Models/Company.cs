@@ -45,5 +45,6 @@ namespace SiteECommerce.Models
         public virtual City Cities { get; set; }
         public virtual Departaments Departament { get; set; }
         public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<Category> Category { get; set; }
     }
 }

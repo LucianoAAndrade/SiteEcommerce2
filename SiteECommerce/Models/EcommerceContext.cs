@@ -21,5 +21,7 @@ namespace SiteECommerce.Models
         public System.Data.Entity.DbSet<SiteECommerce.Models.Company> Companies { get; set; }
 
         public System.Data.Entity.DbSet<SiteECommerce.Models.User> Users { get; set; }
+
+        public System.Data.Entity.DbSet<SiteECommerce.Models.Category> Categories { get; set; }
     }
 }
