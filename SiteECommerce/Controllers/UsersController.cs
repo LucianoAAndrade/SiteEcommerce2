@@ -8,6 +8,7 @@ using static SiteECommerce.Classes.UserHelper;
 
 namespace SiteECommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private EcommerceContext db = new EcommerceContext();

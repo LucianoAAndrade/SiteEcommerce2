@@ -11,6 +11,7 @@ using SiteECommerce.Models;
 
 namespace SiteECommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CompaniesController : Controller
     {
         private EcommerceContext db = new EcommerceContext();

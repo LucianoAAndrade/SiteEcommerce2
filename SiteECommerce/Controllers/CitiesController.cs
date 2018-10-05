@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace SiteECommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CitiesController : Controller
     {
         private EcommerceContext db = new EcommerceContext();

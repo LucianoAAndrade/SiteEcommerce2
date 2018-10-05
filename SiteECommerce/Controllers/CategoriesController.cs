@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace SiteECommerce.Controllers
 {
+    [Authorize(Roles = "User, Admin")]
     public class CategoriesController : Controller
     {
         private EcommerceContext db = new EcommerceContext();
@@ -46,15 +47,31 @@ namespace SiteECommerce.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryId,Description,CompanyId")] Category category)
         {
-            if (ModelState.IsValid)
+            try
             {
                 db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "Name", category.CompanyId);
+                if (ModelState.IsValid)
+                {                    
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                if (ex.InnerException != null && ex.InnerException.InnerException != null && ex.InnerException.InnerException.Message.Contains("_Index"))
+                {
+                    ModelState.AddModelError(string.Empty, "Não é possivel salvar um mesma categoria com o mesmo nome!!");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+                
+            }
             return View(category);
+            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "Name", category.CompanyId);
         }
 
         // GET: Categories/Edit/5
